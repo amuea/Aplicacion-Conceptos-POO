@@ -1,20 +1,78 @@
-# Aquí hay un ejemplo simple de cómo definir una clase en Python:
+# Herencia:
 
-class Coche:
-    def __init__(self, marca, modelo, color):
-        self.marca = marca
-        self.modelo = modelo
-        self.color = color
+# La clase Persona es la clase padre con atributos básicos como edad, peso y estatura.
+# La clase Maria hereda de Persona y añade un atributo adicional ocupacion.
+# Además, tiene un método mostrar_informacion que utiliza tanto los atributos heredados como el atributo específico de Maria.
+# Se crea un objeto masa_corporal de la clase Maria y se muestra su información utilizando el método mostrar_informacion.
 
-    def arrancar(self):
-        print(f"El coche {self.marca} {self.modelo} color {self.color} está arrancando.")
+class Persona:
+    def __init__(self, edad, peso, estatura):
+        self.edad = edad
+        self.peso = peso
+        self.estatura = estatura
+        
+class Maria(Persona):  # Herencia de la clase Persona
+    def __init__(self, edad, peso, estatura, ocupacion):
+        super().__init__(edad, peso, estatura)  # Llamada al constructor de la clase padre
+        self.ocupacion = ocupacion
 
-# En este ejemplo, Coche es la clase con atributos marca, modelo, y color, y un método arrancar().
+    # Método específico de la clase Maria
+    def mostrar_informacion(self):
+        return f"Maria {self.edad} {self.peso} {self.estatura}, con {self.ocupacion}"
 
-# Creación de Objetos:
+# Creación de un objeto de la clase Maria
+masa_corporal = Maria("40", "57", "155", "Educadora")
+print(masa_corporal.mostrar_informacion(edad, peso, estatura))
 
-# A partir de esta clase, podemos crear múltiples objetos, cada uno representando un coche específico
-# con sus propias características.
 
-mi_coche = Coche("Suzuki", "SZ", "Gris")
-mi_coche.arrancar()
+
+# Encapsulación:
+
+class IMC:
+    def __init__(self, masa_corporal):
+        self.__masa = masa_corporal  # Atributo privado
+
+    def calcular(self, datos):
+        if datos > 0:
+            self.__masa += datos
+            print(f"Calculando: {datos}. Nuevo indice: {self.__masa}")
+        else:
+            print("Datos a calcular debe ser positiva.")
+
+    def obtener_masa(self):  # Método 'getter' para la masa
+        return self.__masa
+
+# Creando un objeto de la clase IMC
+masa_corporal = MasaCorporal(24)
+
+# Utilizando los métodos de la clase
+print(f"Masa corporal: {masa_corporal.obtener_masa(datos)}")
+masa_corporal.calcular(edad, peso, estatura)
+
+
+
+# Polimorfismo:
+
+# La clase Ocupacion tiene un método cambiar, que proporciona un mensaje genérico de profesional.
+# Las clases Educadora e Ingeniera heredan de Ocupacion y sobrescriben el método cambiar para proporcionar mensajes específicos para cada ocupacion.
+# Al crear instancias de Educadora e Ingeniera y llamar al método cambiar, se ejecutan las versiones sobrescritas de este método, demostrando polimorfismo.
+
+class Ocupacion:
+    def cambiar(self):
+        return "Ocupacion profesional"
+
+class Educadora(Ocupacion):
+    def mantener(self):
+        return "Educadora para laborar"
+
+class Ingeniera(Ocupacion):
+    def cambiar(self):
+        return "Ingeniera, estudiando"
+
+# Creando objetos de las clases derivadas
+primera_ocupacion = Educadora(laborar)
+segunda_ocupacion = Ingeniera(estudiando)
+
+# Utilizando el método sobrescrito
+print(primera_ocupacion.mantener(laborar))
+print(segunda_ocupacion.cambiar(estudiando))
